@@ -5,3 +5,4 @@ void charss();
  double searchStudentScore(int id,double *a);
  double Sum(double* sum);
  double average(int sum,double sums);
+ void analy(double* p,int sum);
