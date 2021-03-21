@@ -19,7 +19,7 @@ void printfNumClass(int a[])
 		}
 	}
 }
-void* getStudentNum(int sum, int* p)
+void* getStudentNum(int sum, double* p)
 {
 	int a[30] = { 0 };
 	double score;
@@ -32,3 +32,44 @@ void* getStudentNum(int sum, int* p)
 	p = a;
 	return p;
 }
+
+double searchStudentScore(int id,double *a)
+{
+	int Score;
+	Score = *(a + id);
+	if (Score == -1) {
+		return -1;
+	}
+	else {
+		return Score;
+	}
+}
+
+double Sum(double* sum)
+{
+	int x = 0;
+	int Score = 0;
+	for (x = 0; x != -1; x++) {
+		if (!(*(sum + x))) {
+			x = -2;
+		}
+		else {
+			Score += *(sum + x);
+		}
+	}
+	return Score;
+}
+
+double average(int sum,double sums)
+{
+	double avarage;
+	if (sums >= 0) {
+		avarage = sums / sum;
+		avarage = (double)(int)((sums / sum) * 100) / 100;
+	}
+	else {
+		return -1;
+	}
+
+}
+
