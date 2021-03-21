@@ -4,13 +4,13 @@ void charss()
 {
 	printf("sdaqweqwd");
 }
-void printfNumClass(int a[])
+void printfNumClass(double *p)
 {
 	int i ;
 	printf("Printf Is:\n");
-	for (i = 0; a[i]; i++) {
-		printf("%d", a[i]);
-		if (a[i + 1]) {
+	for (i = 0; *(p+i); i++) {
+		printf("%lf", *(p+i));
+		if (*(p+i+1)) {
 			printf(" ,");
 		}
 		else {
@@ -19,9 +19,10 @@ void printfNumClass(int a[])
 		}
 	}
 }
-void* getStudentNum(int sum, double* p)
+double *getStudentNum(int sum)
 {
 	int a[30] = { 0 };
+	double *p;
 	double score;
 	for (int s = 0; s < sum; s++) {
 		printf("请输入ID为%的学生的值\n您输入的值是:");
@@ -88,8 +89,23 @@ void analy(double* p,int sum)
 		if ((score <= 100) && (score >= 90)) {
 			a++;
 		}
-		printf("优秀：%d,\n良好：%d,\n中等：%d,\n及格：%d\n不及格：\n", a, b, c, d, e);
+		printf("优秀:%d,\n良好:%d,\n中等:%d,\n及格:%d\n不及格:%d\n",a, b, c, d, e);
 		return 1;
 	}
 }
+
+void LtoH(double* p) {
+	int i, j;
+	double temp;
+	for (i = 0; i < 10 - 1; i++) {
+		for (j = 0; j < 10 - 1 - i; j++) {
+			if (*(p+j) > *(p+j+1) ){
+				temp = *(p + j);
+				*(p + j) = *(p + j+1);
+				*(p + j+1) = temp;
+			}
+		}
+	}
+}
+
 

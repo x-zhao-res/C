@@ -3,8 +3,12 @@
 int main() {
 	int choose;
 	int state = 0;
-	int *ScoreGet;
+	double *ScoreGet;
+	int sum,scSum;
+	int id;
 	printf("Welcome To The Student Score ansyslz System\n\n");
+	printf("请输入您班学生总数：\n");
+	scanf_s("%d", &sum);
 	printf("Input 1 To Get Every Student Score By Id \n\n");
 	printf("Input 2 To Make Table About Sum And  ES\n\n");
 	printf("Input 3 To Printf  High To Low\n\n");
@@ -30,17 +34,47 @@ int main() {
 			switch (choose)
 			{
 			case 1: {
-				printf("1\n");
+				ScoreGet=getStudentNum(sum);
 				getchar();
 				break;
 			 }
 			case 2: {
-				printf("2\n");
+				scSum = Sum(ScoreGet);
+				average(sum, scSum);
 				getchar();
 				break;
 			}
 			case 3: {
 				printf("3\n");
+				getchar();
+				break;
+			}
+			case 4: {
+				printf("3\n");
+				getchar();
+				break;
+			}
+			case 5: {
+				printfNumClass(ScoreGet);
+				getchar();
+				break;
+			}
+			case 6: {
+				printf("请输入要查询的学生ID");
+				scanf_s("%d", id);
+				searchStudentScore(id, ScoreGet);
+				getchar();
+				break;
+			}
+			case 7: {
+				analy(ScoreGet, sum);
+				getchar();
+				break;
+			}
+			case 8: {
+				printfNumClass(ScoreGet);
+				printf("\n");
+				average(ScoreGet,sum);
 				getchar();
 				break;
 			}
