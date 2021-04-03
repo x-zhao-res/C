@@ -1,10 +1,14 @@
 #include<stdio.h>
+#include<Windows.h>
+#include<stdlib.h>
 #include"fun1.h"
 int main() {
 	int choose;
 	int state = 0;
-	double *ScoreGet;
+	double ScoreGet;
 	int sum,scSum;
+	double scoreList[30] = { 0 };
+	double* Score = scoreList;
 	int id;
 	printf("Welcome To The Student Score ansyslz System\n\n");
 	printf("请输入您班学生总数：\n");
@@ -13,7 +17,7 @@ int main() {
 		printf("输入有误即将退出");
 		return 0;
 	}
-	printf("Input 1 To 	Input record \n\n");
+	printf("Input 1 To Input record \n\n");
 	printf("Input 2 To Calculate total and average score of course\n\n");
 	printf("Input 3 To Sort in descending order by score\n\n");
 	printf("Input 4 To Sort in as ending order by score\n\n");
@@ -37,22 +41,37 @@ int main() {
 			switch (choose)
 			{
 			case 1: {
-				printf("1\n");
+				if (scoreList[1]) {
+					MessageBox(NULL, TEXT("请不要重复输入"), TEXT("警告"),MB_YESNO);
+					break;
+				}
+				printf("您班学生总数为：%d\n请从第1号开始录入分数\n", sum);
+				for (int k = 0 ; k < sum; k++) {
+					printf("请输入第%d位学生的数据:", k + 1);
+					scanf_s("%lf",&ScoreGet);
+					*(Score + k) = ScoreGet;
+					printf("第%d号，%.2lf分\n",k+1, *(Score + k));
+				}
+				printf("数据录入完毕,请查看学生列表");
+				for (int c = 0; c < sum; c++)
+				{
+					printf("\n第%d名-分数:%.2lf\n", c+1,*(Score + c));
+				}
 				getchar();
 				break;
 			 }
 			case 2: {
-				printf("2\n");
+				average(Score, sum);
 				getchar();
 				break;
 			}
 			case 3: {
-				printf("3\n");
+				LtoH(Score, sum,1);
 				getchar();
 				break;
 			}
 			case 4: {
-				printf("4\n");
+				LtoH(Score, sum, 0);
 				getchar();
 				break;
 			}
@@ -72,7 +91,7 @@ int main() {
 				break;
 			}
 			case 8: {
-				printf("8\n");
+				analy(Score, sum);
 				getchar();
 				break;
 			}
