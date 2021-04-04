@@ -1,15 +1,18 @@
 #include<stdio.h>
 #include<Windows.h>
 #include<stdlib.h>
+#include <conio.h>
 #include"fun1.h"
 int main() {
 	int choose;
 	int state = 0;
+	char name[30][20] = { 0 };
+	char* names = name;
 	double ScoreGet;
 	int sum,scSum;
 	double scoreList[30] = { 0 };
 	double* Score = scoreList;
-	int id;
+	int id = 0;
 	printf("Welcome To The Student Score ansyslz System\n\n");
 	printf("请输入您班学生总数：\n");
 	scanf_s("%d", &sum);
@@ -76,17 +79,36 @@ int main() {
 				break;
 			}
 			case 5: {
-				printf("5\n");
+				printf("请按照学号输入对应学生的名字\n");
+				char a[20];
+				for (int s = 0; s < sum; s++) {
+					printf("第%d位学生名字：", s + 1);
+					printf("学号：%d——学生：%s——分数：%.2lf\n", s + 1, name[s], *(Score + s));
+				}
+				printf("按下U/u键获取全部列表，按任意键退出");
+				if (_kbhit()) {
+					if (_getch() == 117 || _getch() == 85) {
+						for (int c = 0; c < sum; c++) {
+							printf("学号：%d——学生：%s——分数：%.2lf\n", c + 1, name[c], *(Score + c));
+						}
+					}
+					else
+					{
+						break;
+					}
+				}
 				getchar();
 				break;
 			}
 			case 6: {
-				printf("6\n");
+			
 				getchar();
 				break;
 			}
 			case 7: {
-				printf("7\n");
+				printf("请输入要查询的学生ID：");
+				scanf_s("%d", &id);
+				searchStudentScore(id, Score);
 				getchar();
 				break;
 			}

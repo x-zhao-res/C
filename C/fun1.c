@@ -1,51 +1,17 @@
 #include "fun1.h"
 #include<stdio.h>
-void charss()
-{
-	printf("sdaqweqwd");
-}
-void printfNumClass(double *p)
-{
-	int i ;
-	printf("Printf Is:\n");
-	for (i = 0; *(p+i); i++) {
-		printf("%lf", *(p+i));
-		if (*(p+i+1)) {
-			printf(" ,");
-		}
-		else {
-			printf("/n");
-			printf("Printf over!");
-		}
-	}
-}
 double searchStudentScore(int id,double *a)
 {
-	int Score;
-	Score = *(a + id);
-	if (Score == -1) {
-		return -1;
+	if (id > 30) {
+		printf("错误，超出范围！\n");
+	}
+	if (*(a + id)) {
+		printf("第%d号的学生成绩为%.2lf\n", *(a + (id - 1)));
 	}
 	else {
-		return Score;
+		printf("超过上限，请重新输入");
 	}
 }
-
-double Sum(double* sum)
-{
-	int x = 0;
-	int Score = 0;
-	for (x = 0; x != -1; x++) {
-		if (!(*(sum + x))) {
-			x = -2; 
-		}
-		else {
-			Score += *(sum + x);
-		}
-	}
-	return Score;
-}
-
 double average(double *p,int sums)
 {
 	double sum = 0;
@@ -82,7 +48,7 @@ void analy(double* p,int sum)
 	d = (float)d;
 	e = (float)e;
 	sum = (float)sum;
-	printf("优秀：%d,占比%.2lf\n良好：%d,占比%.2lf\n中等：%d,占比%.2lf\n及格：%d,占比%.2lf\n不及格：%d,占比%.2lf\n", a, (float)a/sum, b,(float)b/sum, c, (float)c/sum, d,(float)d/sum, e, (float)e/sum);
+	printf("优秀：%d,占比%.2lf%%\n良好：%d,占比%.2lf%%\n中等：%d,占比%.2lf%%\n及格：%d,占比%.2lf%%\n不及格：%d,占比%.2lf%%\n", a, ((float)a/sum) * 100, b,((float)b/sum) * 100, c, ((float)c/sum) * 100, d,((float)d/sum) * 100, e, (float)e/sum) *100 ;
 }
 
 void LtoH(double* p,int sums,int a) {
