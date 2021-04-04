@@ -1,9 +1,6 @@
 #include<stdio.h>
-void charss();
- void printfNumClass(double *p);
- double *getStudentNum(int sum);
  double searchStudentScore(int id,double *a);
- double Sum(double *sum);
- double average(int sum,double sums);
+ double average(double* p, int sums);
  void analy(double* p,int sum);
- void LtoH(double* p);
+ void LtoH(double* p,int sums,int a);
+ void getAll(double* p, char name[30][20] ,int sum);
