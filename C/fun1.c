@@ -5,12 +5,7 @@ double searchStudentScore(int id,double *a)
 	if (id > 30) {
 		printf("错误，超出范围！\n");
 	}
-	if (*(a + id)) {
-		printf("第%d号的学生成绩为%.2lf\n", *(a + (id - 1)));
-	}
-	else {
-		printf("超过上限，请重新输入");
-	}
+		printf("第%d号的学生成绩为%.2lf\n", id,*(a + (id - 1)));
 }
 double average(double *p,int sums)
 {
