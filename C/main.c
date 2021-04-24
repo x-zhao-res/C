@@ -4,30 +4,37 @@
 #include <conio.h>
 #include"fun1.h"
 int main() {
-	int choose;
+	int choose,subjects;
+	char subjecte[6][10] = { 0 };
+	char(*cat)[10] = &subjecte;
 	int state = 0;
 	char name[30][20] = { 0 };
 	double ScoreGet;
 	int sum,scSum;
-	double scoreList[30] = { 0 };
-	double* Score = scoreList;
+	double scoreList[30][6] = { 0 };
+	double (*Score)[6] = &scoreList;
+	//30是学生数，6是科目数
 	int id = 0;
 	printf("Welcome To The Student Score ansyslz System\n\n");
 	printf("请输入您班学生总数：\n");
 	scanf_s("%d", &sum);
-	if ((sum>30 || sum<=0 )) {
+	printf("请输入期末考试科目数\n");
+	scanf_s("%d", &subjects);
+	if ((sum > 30 || sum <= 0) || (subjects < 0 || subjects>6)) {
 		printf("输入有误即将退出");
 		return 0;
 	}
-	printf("Input 1 To Input record \n\n");
-	printf("Input 2 To Calculate total and average score of course\n\n");
-	printf("Input 3 To Low To High\n\n");
-	printf("Input 4 To High To Low\n\n");
-	printf("Input 5 Get All\n\n");
-	printf("Input 6 To Get Name\n\n");
-	printf("Input 7 To SearchByID\n\n");
-	printf("Input 8 To Analyse All\n\n");
-	printf("1-8 input must Input------ -1 ------To exit\n\n");
+	printf("请输入科目：\n");
+	for (int c = 0; c < subjects; c++) {
+		printf("请输入第%d个科目\n", c+1);
+		scanf_s("%s", *(cat + c), sizeof(*(cat + c)));
+	}
+	for (int d = 0; d < subjects; d++) {
+		printf("%d.%s  ",d+1,*(cat + d));
+	}
+	//-----------------------------
+	textOut();
+	//------------------------------
 	for (state = 0; state != -1; state++) {
 		printf("Please Choose The Function\n");
 		scanf_s("%d", &choose);
@@ -43,37 +50,44 @@ int main() {
 			switch (choose)
 			{
 			case 1: {
-				if (scoreList[1]) {
+			if (scoreList[1][1]) {
 					MessageBox(NULL, TEXT("请不要重复输入"), TEXT("警告"), MB_YESNO);
 					break;
 				}
-				printf("您班学生总数为：%d\n请从第1号开始录入分数\n", sum);
-				for (int k = 0; k < sum; k++) {
-					printf("请输入第%d位学生的数据:", k + 1);
-					scanf_s("%lf", &ScoreGet);
-					*(Score + k) = ScoreGet;
-					printf("第%d号，%.2lf分\n", k + 1, *(Score + k));
+			printf("总数：%d  科目：%d科\n", subjects, sum);
+			for (int stu = 0; stu < sum; stu++) {
+				for (int sub = 0; sub < subjects; sub++) {
+					printf("第%d个学生的%s成绩:\n", stu+1, *(cat + sub));
+					scanf_s("%lf", (*(scoreList + stu) + sub), sizeof(*(scoreList + stu) + sub));
 				}
-				printf("数据录入完毕,请查看学生列表");
-				for (int c = 0; c < sum; c++)
-				{
-					printf("\n第%d名-分数:%.2lf\n", c + 1, *(Score + c));
+			}
+			printf("录入完毕\n");
+			printf(" 学号 ");
+			for (int ds = 0; ds < subjects; ds++) {
+				printf("  %s  ",*(cat + ds));
+			}
+			printf("\n");
+			for (int stus = 0; stus < sum; stus++) {
+				printf("  %d ", stus + 1);
+				for (int subs = 0; subs < subjects; subs++) {
+					printf("   %.2lf ", *(*(scoreList + stus) + subs));
 				}
-				getchar();
-				break;
+				printf("\n");
+			 }
+			break;
 			}
 			case 2: {
-				average(Score, sum);
+				average(Score, sum,subjects,cat);
 				getchar();
 				break;
 			}
 			case 3: {
-				LtoH(Score, sum, 1);
+				LtoH(Score, subjects,sum, 1);
 				getchar();
 				break;
 			}
 			case 4: {
-				LtoH(Score, sum, 0);
+				LtoH(Score, subjects,sum, 0);
 				getchar();
 				break;
 			}
@@ -94,7 +108,7 @@ int main() {
 				}
 				printf("请根据学生学号录入姓名\n");
 				int num = 0;
-				char a[20];
+				char a[30];
 				for (int c = 0; c < sum; c++) {
 					printf("第%d号学生：", c + 1);
 					scanf_s("%s", name[c], sizeof(name[c]));
@@ -109,12 +123,12 @@ int main() {
 			case 7: {
 				printf("请输入要查询的学生ID：");
 				scanf_s("%d", &id);
-				searchStudentScore(id, Score);
+				searchStudentScore(id, Score,sum,subjects,cat);
 				getchar();
 				break;
 			}
 			case 8: {
-				analy(Score, sum);
+				analy(Score, sum,subjects,cat);
 				getchar();
 				break;
 			}
