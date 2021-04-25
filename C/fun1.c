@@ -2,33 +2,32 @@
 #include<stdio.h>
 double searchStudentScore(int id, double(*p)[6], int sums, int sub, char(*cat)[10])
 {
-	for (int c = 0; c <sub; c++) {
-		printf("%d\n", id);
+	printf("%d\n", id);
+	for (int c = 0; c <sub; c++) {	
 		printf("%s:%lf\n", *(cat + c), *(*(p + id) + sub));
 	}
 }
 double average(double(*p)[6],int sums,int sub, char(*cat)[10])
 {
-	//2021.4.24
 	printf(" 科目 总分 平均分\n");
 	double score = 0;
 	for (int num = 0; num < sub; num++) {
-		printf(" %s: ", *(cat + sub));
+		printf("%s: ", *(cat + num));
 		score = 0;
 		for (int subs = 0; subs < sums; subs++) {
-			score += *(*(p + sums) + sub);
-			printf("%.2lf ", score);
+			score += *(*(p + num) +subs);
+			printf("%.2lf ", *(*(p + num) + subs));
 		}
 		printf("%.2lf\n", (score / sums));
 	}
 	printf("-------------------------------------------------------");
-	printf(" 学号 总分 平均分");
+	printf(" \n学号 总分 平均分\n");
 	double studentsNumSum = 0;
 	for (int num = 0; num < sums; num++) {
 		printf(" %d ",num+1);
 		studentsNumSum = 0;
 		for (int subs = 0; subs <sub; subs++) {
-			studentsNumSum += *(*(p + sums) + sub);
+			studentsNumSum += *(*(p +num) + subs);
 			printf("%.2lf ", studentsNumSum);
 		}
 		printf("%.2lf\n", (studentsNumSum / sums));
@@ -79,7 +78,7 @@ void LtoH(double (*p)[6],int sub,int sums,int a) {
 		for (int num = 0; num < sums; num++) {
 			NumSum = 0;
 			for (int subs = 0; subs < sub; subs++) {
-				NumSum += *(*(p + sums) + sub);
+				NumSum += *(*(p + num) + subs);
 			}
 			lohList[num] = NumSum;
 		}
@@ -106,7 +105,7 @@ void LtoH(double (*p)[6],int sub,int sums,int a) {
 		for (int num = 0; num < sums; num++) {
 			NumSum = 0;
 			for (int subs = 0; subs < sub; subs++) {
-				NumSum += *(*(p + sums) + sub);
+				NumSum += *(*(p + num) + subs);
 			}
 			lohList[num] = NumSum;
 		}

@@ -96,7 +96,7 @@ int main() {
 					getAll(Score, name, sum);
 				}
 				else {
-					printf("´íÎó");
+					printf(" ´íÎó ");
 					break;
 				}
 				break;
